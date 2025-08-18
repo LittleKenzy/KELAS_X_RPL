@@ -1,0 +1,26 @@
+
+body {
+  background-color: aqua;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  width: 200px;
+}
+
+.batas {
+  margin-left: 200px;
+}
+
+.warna {
+  background-color: yellow;
+}
+
+#background {
+  background-color: red;
+}
+
+#kiri {
+  margin-left: 200px;
+}
