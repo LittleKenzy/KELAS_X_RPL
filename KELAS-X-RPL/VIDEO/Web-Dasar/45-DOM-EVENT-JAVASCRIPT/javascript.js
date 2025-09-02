@@ -19,19 +19,3 @@ function tampil() {
 
   document.querySelector("#paragraf").innerText = "sigma";
 }
-
-// btn.onclick = tampil;
-
-// btn.onclick = function () {
-//   alert("javascript")
-// }
-
-// btn.onmouseover = function () {
-//   alert("javascript")
-// }
-
-// // btn.addEventListener("click", tampil);
-
-btn.addEventListener("mouseover", function () {
-  alert("javascript")
-})
