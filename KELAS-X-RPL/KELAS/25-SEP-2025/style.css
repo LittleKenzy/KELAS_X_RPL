@@ -1,0 +1,42 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#rumah {
+	width: 80%;
+	margin: auto;
+}
+
+.kompetensi {
+	color: brown;
+	font-style: initial;
+	font-size: large;
+}
+
+.pendidikan {
+	height: 500px;
+}
+
+.huruf {
+	font-size: xx-large;
+	font-weight: 1000;
+}
+
+.jarak {
+	margin-top: 30px;
+	margin-bottom: 50px;
+}
+
+.warna {
+	background-color: yellow;
+}
+
+.hard {
+	margin-top: 20px;
+	font-weight: 500;
+	text-align: center;
+}
+
+.ukuran {
+	font-size: 30px;
+}
