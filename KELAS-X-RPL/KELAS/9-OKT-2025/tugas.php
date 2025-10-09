@@ -2,7 +2,7 @@
 <?php
 $menu = ["Profil", "Kesiswaan", "Bimbel", "Berita", "Artikel", "Buku tamu", "Kontak"];
 $berita = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias et, inventore, mollitia quaerat nemo ducimus quia nobis qui cum perferendis animi sequi ab facere ullam dolorem a repudiandae asperiores soluta accusamus maxime, sit corrupti quisquam totam neque? Ipsum, dolorum velit cum minus, sapiente beatae quo quia dignissimos ducimus aperiam quidem?";
-$img = "img/tw.png";
+$img = "img/tv.avif";
 
 ?>
 <!DOCTYPE html>
