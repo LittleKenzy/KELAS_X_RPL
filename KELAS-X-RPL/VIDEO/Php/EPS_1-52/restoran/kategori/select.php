@@ -1,4 +1,6 @@
 <div style="margin: auto; width: 200px; padding: 10px;">
+
+    <h3><a href="http://kelas_x_rpl.test/KELAS-X-RPL/VIDEO/Php/EPS_1-52/restoran/kategori/insert.php">TAMBAH DATA</a></h3>
     <?php
 
     require_once '../function.php';
@@ -20,7 +22,7 @@
     echo '<br><br>';
 
     if (isset($_GET['p'])) {
-        $p=$_GET['p'];
+        $p = $_GET['p'];
         // echo "Halaman: " . $p . "<br>";
         $mulai = ($p * $banyak) - $banyak;
     } else {
