@@ -1,4 +1,9 @@
 <?php
+require_once '../dbcontroller.php';
+$db = new DB;
+
+
+
 $jumlah_data = $db->rowCount("SELECT idkategori FROM tblkategori");
 $banyak = 4;
 
@@ -19,6 +24,10 @@ $no = 1+$mulai;
 
 ?>
 
+<div class="float-start" style="margin-right: 4rem;">
+    <a href="?f=kategori&m=insert" class="btn btn-primary" role="button">Tambah Data</a>
+</div>
+
 <h1>Kategori</h1>
 
 <table class="table table-bordered">
@@ -38,8 +47,8 @@ $no = 1+$mulai;
             <tr>
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $r['kategori']; ?></td>
-                <td><?php echo $r['idkategori']; ?></td>
-                <td><?php echo $r['idkategori']; ?></td>
+                <td><a href="?f=kategori&m=delete&id=<?php echo $r['idkategori']; ?>">Delete</a></td>
+                <td><a href="?f=kategori&m=update&id=<?php echo $r['idkategori']; ?>">Update</a></td>
             </tr>
         <?php endforeach ?>
     </tbody>
