@@ -25,10 +25,6 @@ $no = 1+$mulai;
 
 ?>
 
-<div class="float-start" style="margin-right: 4rem;">
-    <a href="?f=pelanggan&m=insert" class="btn btn-primary" role="button">Tambah Data</a>
-</div>
-
 <h1>Pelanggan</h1>
 
 <table class="table table-bordered W-70">
