@@ -33,7 +33,9 @@ if (isset($_GET['log'])) {
 
             <div class="col-md-9">
                 <div class="float-end mt-4"><a href="?log=logout">Logout</a></div>
-                <div class="float-end mt-4" style="margin-right: 2rem;">User</div>
+                <div class="float-end mt-4" style="margin-right: 2rem;">User : <a
+                        href="?f=user&m=updateuser&id=<?php echo $_SESSION['iduser']; ?>"><?php echo $_SESSION['user']; ?></a>
+                </div>
             </div>
         </div>
 
@@ -59,8 +61,6 @@ if (isset($_GET['log'])) {
 
                     require_once $file;
                 }
-
-
                 ?>
             </div>
         </div>

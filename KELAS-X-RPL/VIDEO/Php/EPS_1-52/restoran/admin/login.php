@@ -52,15 +52,17 @@ if (isset($_POST['simpan'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM tbluser WHERE email = '$email' AND '$password'";
+    $sql = "SELECT * FROM tbluser WHERE email = '$email' AND password = '$password'";
     $count = $db->rowCount($sql);
     if ($count == 0) {
-        echo "<h3>Email atau password salah</h3>";
+        echo "<center><h3>Email atau password salah</h3></center>";
     } else {
         $sql = "SELECT * FROM tbluser WHERE email = '$email' AND '$password'";
         $row = $db->getItem($sql);
         $_SESSION['user'] = $row['email'];
         $_SESSION['level'] = $row['level'];
+        $_SESSION['iduser'] = $row['iduser'];
+        
         header("Location: index.php");
     }
 }
