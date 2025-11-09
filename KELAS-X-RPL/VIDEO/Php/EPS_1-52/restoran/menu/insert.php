@@ -12,7 +12,7 @@ $row = $db->getAll("SELECT * FROM tblkategori ORDER BY idkategori ASC");
             <label for="">Kategori</label>
             <select name="idkategori" id="" onchange="this.form.submit()">
                 <?php foreach ($row as $r): ?>
-                    <option value="<?php echo $r['idkategori']; ?>">
+                    <option value="<?php echo $r['idkategori']; ?>" <?php echo (isset($_POST['idkategori']) && $_POST['idkategori'] == $r['idkategori']) ? 'selected' : ''; ?>>
                         <?php echo $r['kategori']; ?>
                     </option>
                 <?php endforeach; ?>
@@ -50,7 +50,7 @@ if (isset($_POST['simpan'])) {
         echo '<div class="alert alert-danger">Gambar harus diisi</div>';
     } else {
         $sql = "INSERT INTO tblmenu VALUES (NULL, $idkategori, '$menu', '$gambar', '$harga')";
-        move_uploaded_file($temp, '../upload/'.$gambar);
+        move_uploaded_file($temp, '../upload/' . $gambar);
         $db->runSql($sql);
         header('location:?f=menu&m=select');
     }
