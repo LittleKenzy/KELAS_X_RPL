@@ -4,7 +4,7 @@ class DB
 {
     private $host = '127.0.0.1';
     private $user = 'root';
-    private $password = '';
+    private $password = 'admin123';
     private $dbname = 'dbrestoran';
     private $koneksi;
 
