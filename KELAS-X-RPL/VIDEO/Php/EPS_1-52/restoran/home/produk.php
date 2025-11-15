@@ -50,7 +50,7 @@ $no = 1 + $mulai;
             <div class="card-body">
                 <h5 class="card-title"><?php echo $r['menu']; ?></h5>
                 <p class="card-text"><?php echo 'Rp ', $r['harga']; ?></p>
-                <a href="?f=kategori&m=insert" class="btn btn-primary" role="button">Beli</a>
+                <a href="?f=home&m=beli&id=<?php echo $r['idmenu'] ?>" class="btn btn-primary" role="button">Beli</a>
             </div>
         </div>
     <?php endforeach ?>
