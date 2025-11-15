@@ -21,15 +21,25 @@ $row = $db->getAll($sql);
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                <h2>Restoran SMK</h2>
+            <div class="col-md-3 mt-4">
+                <h2><a href="" class="text-decoration-none">Restoran SMK</a></h2>
             </div>
 
             <div class="col-md-9">
-                <div class="float-end mt-4"><a>Logout </a></div>
-                <div class="float-end mt-4" style="margin-right: 2rem;"><a> Login</a></div>
-                <div class="float-end mt-4" style="margin-right: 2rem;">Pelanggan<a></div>
-                <div class="float-end mt-4" style="margin-right: 2rem;">Daftar<a></div>
+                <?php
+
+                if (isset($_SESSION['pelanggan'])) {
+                    echo '
+                    <div class="float-end mt-4" style="margin-right: 2rem;">Logout</div>
+                    <div class="float-end mt-4" style="margin-right: 2rem;">Pelanggan<a></div>
+                    ';
+                } else {
+                    echo '
+                    <div class="float-end mt-4" style="margin-right: 2rem;"><a> Login</a></div>
+                    <div class="float-end mt-4" style="margin-right: 2rem;"><a href="?f=home&m=daftar">Daftar</a></div>
+                    ';
+                }
+                ?>
             </div>
         </div>
 
@@ -40,7 +50,8 @@ $row = $db->getAll($sql);
                 <ul class="nav flex-column">
                     <?php if (!empty($row)) { ?>
                         <?php foreach ($row as $r): ?>
-                            <li class="nav-item"><a href="#" class="nav-link"><?php echo $r['kategori']; ?></a></li>
+                            <li class="nav-item"><a href="?f=home&m=produk&id=<?php echo $r['idkategori'] ?>"
+                                    class="nav-link"><?php echo $r['kategori']; ?></a></li>
                         <?php endforeach; ?>
                     </ul>
 
