@@ -6,6 +6,11 @@ $db = new DB;
 $sql = "SELECT * FROM tblkategori ORDER BY idkategori";
 $row = $db->getAll($sql);
 
+if (isset($_GET['log'])) {
+    session_destroy();
+    header("Location: index.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -30,12 +35,12 @@ $row = $db->getAll($sql);
 
                 if (isset($_SESSION['pelanggan'])) {
                     echo '
-                    <div class="float-end mt-4" style="margin-right: 2rem;">Logout</div>
-                    <div class="float-end mt-4" style="margin-right: 2rem;">Pelanggan<a></div>
+                    <div class="float-end mt-4" style="margin-right: 2rem;"><a href="?log=logout">Logout</a></div>
+                    <div class="float-end mt-4" style="margin-right: 2rem;"> Pelanggan: ' . $_SESSION['pelanggan'] . ' </div>
                     ';
                 } else {
                     echo '
-                    <div class="float-end mt-4" style="margin-right: 2rem;"><a> Login</a></div>
+                    <div class="float-end mt-4" style="margin-right: 2rem;"><a href="?f=home&m=login"> Login</a></div>
                     <div class="float-end mt-4" style="margin-right: 2rem;"><a href="?f=home&m=daftar">Daftar</a></div>
                     ';
                 }
