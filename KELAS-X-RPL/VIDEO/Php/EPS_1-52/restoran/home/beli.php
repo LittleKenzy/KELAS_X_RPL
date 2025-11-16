@@ -19,6 +19,22 @@ if (isset($_GET['hapus'])) {
     header("Location: ?f=home&m=beli");
 }
 
+if (isset($_GET['tambah'])) {
+    $id = $_GET['tambah'];
+    $_SESSION['_' . $id]++;
+    header("Location: ?f=home&m=beli");
+}
+
+if (isset($_GET['kurang'])) {
+    $id = $_GET['kurang'];
+    if (isset($_SESSION['_' . $id]) && $_SESSION['_' . $id] > 0) {
+        $_SESSION['_' . $id]--;
+        if ($_SESSION['_' . $id] == 0) {
+            unset($_SESSION['_' . $id]);
+        }
+    }
+}
+
 
 function isi($id)
 {
@@ -32,8 +48,11 @@ function isi($id)
 function keranjang()
 {
     global $db;
+
+    $total = 0;
+
     echo '
-    <table class="table table-bordered w-50">
+    <table class="table table-bordered w-70">
         <tr>
             <th>No</th>
             <th>Kategori</th>
@@ -53,13 +72,19 @@ function keranjang()
                 echo ' <tr>';
                 echo '<td>' . $r['menu'] . '</td>';
                 echo '<td>' . 'Rp.', $r['harga'] . '</td>';
-                echo '<td>' . $value . '</td>';
+                echo '<td><a href="?f=home&m=beli&tambah=' . $r['idmenu'] . '" class="text-decoration-none">[+]</a> &nbsp; &nbsp;' . $value . ' &nbsp; &nbsp; <a href="?f=home&m=beli&kurang=' . $r['idmenu'] . '" class="text-decoration-none">[-]</a></td>';
                 echo '<td>' . 'Rp.', $r['harga'] * $value . '</td>';
                 echo '<td>' . '<a href="?f=home&m=beli&hapus=' . $r['idmenu'] . '" class="btn btn-danger">Hapus</a>' . '</td>';
                 echo '<tr/>';
+                $total = $total + ($r['harga'] * $value);
             }
         }
     }
+    echo '<tr>
+        <td colspan="4"><h3>Grand Total: </h3></td>
+        <td><h3> ' . 'Rp.', $total . ' </h3></td>
+    </tr>';
+
     echo '</table>';
 }
 
