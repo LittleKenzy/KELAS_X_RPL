@@ -36,7 +36,7 @@ if (isset($_GET['log'])) {
                 if (isset($_SESSION['pelanggan'])) {
                     echo '
                     <div class="float-end mt-4" style="margin-right: 2rem;"><a href="?log=logout">Logout</a></div>
-                    <div class="float-end mt-4" style="margin-right: 2rem;"> Pelanggan: ' . $_SESSION['pelanggan'] . ' </div>
+                    <div class="float-end mt-4" style="margin-right: 2rem;"> Pelanggan: <a href="?f=home&m=beli"> ' . $_SESSION['pelanggan'] . ' </a> </div>
                     ';
                 } else {
                     echo '
