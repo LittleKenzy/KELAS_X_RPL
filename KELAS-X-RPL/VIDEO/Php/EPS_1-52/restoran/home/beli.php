@@ -74,7 +74,7 @@ function keranjang()
                 echo ' <tr>';
                 echo '<td>' . $r['menu'] . '</td>';
                 echo '<td>' . 'Rp.', $r['harga'] . '</td>';
-                echo '<td><a href="?f=home&m=beli&tambah=' . $r['idmenu'] . '" class="text-decoration-none">[+]</a> &nbsp; &nbsp;' . $value . ' &nbsp; &nbsp; <a href="?f=home&m=beli&kurang=' . $r['idmenu'] . '" class="text-decoration-none">[-]</a></td>';
+                echo '<td><a href="?f=home&m=beli&kurang=' . $r['idmenu'] . '" class="text-decoration-none">[-]</a> &nbsp; &nbsp;' . $value . ' &nbsp; &nbsp; <a href="?f=home&m=beli&tambah=' . $r['idmenu'] . '" class="text-decoration-none">[+]</a></td>';
                 echo '<td>' . 'Rp.', $r['harga'] * $value . '</td>';
                 echo '<td>' . '<a href="?f=home&m=beli&hapus=' . $r['idmenu'] . '" class="btn btn-danger">Hapus</a>' . '</td>';
                 echo '<tr/>';
@@ -92,4 +92,12 @@ function keranjang()
 
 ?>
 
-<a href="?f=home&m=checkout&total=<?php echo $total ?>" class="btn btn-primary" role="button">CheckOut</a>
+<?php
+
+if (!empty($total)) {
+
+
+
+    ?>
+    <a href="?f=home&m=checkout&total=<?php echo $total ?>" class="btn btn-primary" role="button">CheckOut</a>
+<?php } ?>

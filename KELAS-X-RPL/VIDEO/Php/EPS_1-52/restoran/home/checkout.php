@@ -15,6 +15,10 @@ if (isset($_GET['total'])) {
     } else {
         insertOrderDetail($idorder);
     }
+    kosongkanSession();
+    header("Location: ?f=home&m=checkout");
+} else {
+    info();
 }
 
 function idorder()
@@ -37,7 +41,7 @@ function insertOrder($idorder, $idpelanggan, $tgl, $total)
     global $db;
 
     $sql = "INSERT INTO tblorder VALUES ($idorder, $idpelanggan, '$tgl', $total,0,0,0)";
-    echo $sql;
+    $db->runSql($sql);
 }
 
 function insertOrderDetail($idorder = 1)
@@ -59,6 +63,21 @@ function insertOrderDetail($idorder = 1)
             }
         }
     }
+}
+
+function kosongkanSession()
+{
+    foreach ($_SESSION as $key => $value) {
+        if ($key <> 'pelanggan' && $key <> 'idpelanggan') {
+            $id = substr($key, 1);
+            unset($_SESSION['_' . $id]);
+        }
+    }
+}
+
+function info()
+{
+    echo '<h3>Terimakasih, Pesanan Anda akan segera kami proses</h3>';
 }
 
 ?>
