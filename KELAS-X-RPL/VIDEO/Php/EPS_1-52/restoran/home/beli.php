@@ -51,6 +51,8 @@ function keranjang()
 
     $total = 0;
 
+    global $total;
+
     echo '
     <table class="table table-bordered w-70">
         <tr>
@@ -89,3 +91,5 @@ function keranjang()
 }
 
 ?>
+
+<a href="?f=home&m=checkout&total=<?php echo $total ?>" class="btn btn-primary" role="button">CheckOut</a>
