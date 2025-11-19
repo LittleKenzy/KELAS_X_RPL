@@ -46,8 +46,8 @@ function insertOrder($idorder, $idpelanggan, $tgl, $total)
 
 function insertOrderDetail($idorder = 1)
 {
+    global $db;
     foreach ($_SESSION as $key => $value) {
-        global $db;
         if ($key <> 'pelanggan' && $key <> 'idpelanggan') {
             $id = substr($key, 1);
 
