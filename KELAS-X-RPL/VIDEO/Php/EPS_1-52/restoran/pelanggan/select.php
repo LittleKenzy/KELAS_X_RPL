@@ -66,7 +66,7 @@ $no = 1+$mulai;
 
 <?php
 
-for ($i = 1; $i < $halaman; $i++) {
+for ($i = 1; $i <= $halaman; $i++) {
     echo '<a href="?f=pelanggan&m=select&p=' . $i . '">' . $i . '</a>';
     echo '&nbsp;&nbsp;&nbsp;';
 }

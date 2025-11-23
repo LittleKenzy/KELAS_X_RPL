@@ -59,6 +59,7 @@ function cart()
                     <div class="float-end mt-4" style="margin-right: 2rem;"><a href="?log=logout">Logout</a></div>
                     <div class="float-end mt-4" style="margin-right: 2rem;"> Pelanggan: ' . $_SESSION['pelanggan'] . '</div>
                     <div class="float-end mt-4" style="margin-right: 2rem;"> Cart: ( <a href="?f=home&m=beli"> ' . cart() . ' </a> ) </div>
+                    <div class="float-end mt-4" style="margin-right: 2rem;"><a href="?f=home&m=histori"> Histori: <a/></div>
                     ';
                 } else {
                     echo '
