@@ -18,10 +18,17 @@
                             alt=""></a>
                     <ul class="navbar-nav">
                         <li class="nav-item me-4">Cart</li>
-                        <li class="nav-item me-4"><a href="{{ url('register') }}">Register</a></li>
-                        <li class="nav-item me-4">Email</li>
-                        <li class="nav-item me-4">Login</li>
-                        <li class="nav-item">Logout</li>
+                        @if (session()->missing('idpelanggan'))
+                            <li class="nav-item me-4"><a href="{{ url('register') }}">Register</a></li>
+
+                            <li class="nav-item me-4"><a href="{{ url('login') }}">Login</a></li>
+                        @endif
+                        <li class="nav-item me-4">
+                            @if (session()->has('idpelanggan'))
+                        <li>{{ session('idpelanggan')['email'] }}</li>
+                        <li class="nav-item"><a href="{{ url('logout') }}">Logout</a></li>
+                        @endif
+                        </li>
 
                     </ul>
                 </div>
@@ -31,7 +38,8 @@
             <div class="col-2">
                 <ul class="list-group">
                     @foreach ($kategoris as $kategori)
-                        <li class="list-group-item"><a href="{{ url('show/'.$kategori->idkategori) }}">{{ $kategori->kategori }}</a></li>
+                        <li class="list-group-item"><a
+                                href="{{ url('show/' . $kategori->idkategori) }}">{{ $kategori->kategori }}</a></li>
                     @endforeach
 
                 </ul>
