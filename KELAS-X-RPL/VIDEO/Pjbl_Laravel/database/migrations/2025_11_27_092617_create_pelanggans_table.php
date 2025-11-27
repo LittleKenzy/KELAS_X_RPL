@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->id();
+            $table->string('pelanggan', 255);
+            $table->enum('jenis_kelamin', ['P', 'L']);
+            $table->string('alamat', 255);
+            $table->string('telp', 255);
+            $table->string('email', 255);
+            $table->string('password', 255);
             $table->timestamps();
         });
     }

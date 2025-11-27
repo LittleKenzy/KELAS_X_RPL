@@ -9,4 +9,12 @@ class Pelanggan extends Model
 {
     /** @use HasFactory<\Database\Factories\PelangganFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'pelanggan',
+        'email',
+        'password',
+        'alamat',
+        'telp',
+    ];
 }
