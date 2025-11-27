@@ -11,7 +11,7 @@ if (isset($_GET['p'])) {
     $mulai = 0;
 }
 
-$sql = "SELECT * FROM vorder ORDER BY status DESC LIMIT $mulai, $banyak";
+$sql = "SELECT * FROM vorder ORDER BY status, idorder DESC LIMIT $mulai, $banyak";
 $row = $db->getAll($sql);
 
 $no = 1 + $mulai;
@@ -28,6 +28,8 @@ $no = 1 + $mulai;
             <th>Tanggal</th>
             <th>Total</th>
             <th>Bayar</th>
+            <th>Kembali</th>
+            <th>Status</th>
         </tr>
 
     </thead>
@@ -50,6 +52,8 @@ $no = 1 + $mulai;
                     <td><?php echo $r['pelanggan']; ?></td>
                     <td><?php echo $r['tglorder']; ?></td>
                     <td><?php echo $r['total']; ?></td>
+                    <td><?php echo $r['bayar']; ?></td>
+                    <td><?php echo $r['kembali']; ?></td>
                     <?php echo $status; ?>
                 </tr>
             <?php endforeach ?>
@@ -63,6 +67,5 @@ for ($i = 1; $i <= $halaman; $i++) {
     echo '<a href="?f=order&m=select&p=' . $i . '">' . $i . '</a>';
     echo '&nbsp;&nbsp;&nbsp;';
 }
-
 
 ?>
