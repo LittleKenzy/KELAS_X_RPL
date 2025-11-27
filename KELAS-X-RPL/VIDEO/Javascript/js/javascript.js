@@ -1,1 +1,1 @@
-alert("belajar penulisan javascript");
+alert("belajar penulisan js");
