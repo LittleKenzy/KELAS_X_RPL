@@ -2,11 +2,11 @@
 
 <div class="mb-5">
     <form action="" method="post">
-        <div class="mb-3 w-50">
+        <div class="mb-3 w-50 float-start">
             <label for="">Tanggal awal</label>
             <input type="date" name="tawal" id="" required class="form-control">
         </div>
-        <div class="mb-3 w-50">
+        <div class="mb-3 w-50 float-start">
             <label for="">Tanggal akhir</label>
             <input type="date" name="takhir" id="" required class="form-control">
         </div>
@@ -31,7 +31,7 @@ if (isset($_POST['simpan'])) {
 }
 
 $jumlah_data = $db->rowCount("SELECT idorderdetail FROM vorderdetail");
-$banyak = 2;
+$banyak = 3;
 
 $halaman = ceil($jumlah_data / $banyak);
 
