@@ -9,4 +9,13 @@ class Order extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'idorder',
+        'idpelanggan',
+        'tglorder',
+        'total',
+        'bayar',
+        'kembali'
+    ];
 }

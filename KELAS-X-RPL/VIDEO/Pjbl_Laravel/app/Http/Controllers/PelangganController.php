@@ -1,66 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use App\Models\Pelanggan;
-use App\Http\Requests\StorePelangganRequest;
-use App\Http\Requests\UpdatePelangganRequest;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class PelangganController extends Controller
+class PelangganController extends Model
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    use HasFactory;
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorePelangganRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pelanggan $pelanggan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pelanggan $pelanggan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePelangganRequest $request, Pelanggan $pelanggan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Pelanggan $pelanggan)
-    {
-        //
-    }
+    protected $table = 'pelanggans';
+    protected $primaryKey = 'idpelanggan'; // ini penting
+    public $incrementing = true;
+    protected $keyType = 'int';
+    protected $fillable = [
+        'pelanggan',
+        'alamat',
+        'telp',
+        'jeniskelamin',
+        'email',
+        'password'
+    ];
 }

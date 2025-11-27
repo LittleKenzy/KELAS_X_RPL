@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_details', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('idorder');
-            $table->timestamps();
+        Schema::table('order_details', function (Blueprint $table) {
+            $table->integer('jumlah')->after('idmenu');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('order_details');
+        Schema::table('order_details', function (Blueprint $table) {
+            $table->dropColumn('jumlah');
+        });
     }
 };

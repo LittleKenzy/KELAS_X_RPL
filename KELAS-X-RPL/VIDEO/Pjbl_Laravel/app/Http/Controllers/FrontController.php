@@ -108,26 +108,29 @@ class FrontController extends Controller
     public function postlogin(Request $request)
     {
         $data = $request->validate([
-            'email' => 'required | email',
-            'password' => 'required | min:3'
+            'email' => 'required|email',
+            'password' => 'required|min:3'
         ]);
-        $pelanggan = Pelanggan::where('email', $data)->first();
+
+        $pelanggan = Pelanggan::where('email', $data['email'])->first();
+        // dd($pelanggan->idpelanggan);
 
         if ($pelanggan) {
             if (Hash::check($data['password'], $pelanggan->password)) {
-                $data = [
-                    'idpelanggan' => $pelanggan['idpelanggan'],
-                    'email' => $pelanggan['email']
-                ];
-                $request->session()->put('idpelanggan', $data);
+                // set session
+                $request->session()->put('idpelanggan', [
+                    'idpelanggan' => $pelanggan->idpelanggan,
+                    'email' => $pelanggan->email
+                ]);
                 return redirect('/');
             } else {
-                return back()->with('pesan', 'password salah !');
+                return back()->with('pesan', 'Password salah!');
             }
         } else {
-            return back()->with('pesan', 'email belum terdaftar !');
+            return back()->with('pesan', 'Email belum terdaftar!');
         }
     }
+
     public function logout()
     {
         session()->flush();

@@ -7,14 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pelanggan extends Model
 {
-    /** @use HasFactory<\Database\Factories\PelangganFactory> */
     use HasFactory;
 
+    protected $table = 'pelanggans';
+    protected $primaryKey = 'idpelanggan';
+    public $incrementing = true; // auto increment
+    protected $keyType = 'int';   // integer
     protected $fillable = [
         'pelanggan',
         'email',
         'password',
         'alamat',
         'telp',
+        'jeniskelamin'
     ];
 }
+

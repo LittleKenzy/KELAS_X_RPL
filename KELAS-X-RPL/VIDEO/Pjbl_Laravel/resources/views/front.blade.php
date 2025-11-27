@@ -17,7 +17,18 @@
                     <a href="/"><img style="width: 300px" src="{{ asset('img/background.jpg') }}"
                             alt=""></a>
                     <ul class="navbar-nav">
-                        <li class="nav-item me-4">Cart</li>
+
+                        @if (session()->has('cart'))
+                            <li class="nav-item me-4"> <a href="{{ url('cart') }}"> Cart (
+                                    @php
+                                        $count = count(session('cart'));
+                                        echo $count;
+                                    @endphp
+                                    )</a> </li>
+                        @else
+                            <li class="nav-item me-4">Cart</li>
+                        @endif
+
                         @if (session()->missing('idpelanggan'))
                             <li class="nav-item me-4"><a href="{{ url('register') }}">Register</a></li>
 
@@ -48,8 +59,8 @@
                 @yield('content')
             </div>
         </div>
-        <div>
-            footer
+        <div class="bg-light">
+            <p>Copyright &copy;bilalalaudin 2026</p>
         </div>
 
     </div>
