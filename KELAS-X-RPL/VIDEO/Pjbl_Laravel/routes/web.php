@@ -8,3 +8,8 @@ Route::get('/', function () {
 });
 
 Route::get('/', [FrontController::class, 'index']);
+
+
+Route::get('/show/{idkategori}', [FrontController::class, 'show']);
+Route::get('/register', [FrontController::class, 'register']);
+
