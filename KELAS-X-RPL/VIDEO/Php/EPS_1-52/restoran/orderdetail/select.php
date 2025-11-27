@@ -1,1 +1,115 @@
-<h1>Select order detail</h1>
+<h1>Detail Pembelian</h1>
+
+<div class="mb-5">
+    <form action="" method="post">
+        <div class="mb-3 w-50">
+            <label for="">Tanggal awal</label>
+            <input type="date" name="tawal" id="" required class="form-control">
+        </div>
+        <div class="mb-3 w-50">
+            <label for="">Tanggal akhir</label>
+            <input type="date" name="takhir" id="" required class="form-control">
+        </div>
+
+        <div>
+            <input type="submit" name="simpan" id="" value="Simpan" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+
+
+
+
+<?php
+if (isset($_POST['simpan'])) {
+    $tawal = $_POST['tawal'];
+    $takhir = $_POST['takhir'];
+    $sql = "SELECT * FROM vorderdetail WHERE tglorder BETWEEN '$tawal' AND '$takhir'";
+
+    echo $sql;
+}
+
+$jumlah_data = $db->rowCount("SELECT idorderdetail FROM vorderdetail");
+$banyak = 2;
+
+$halaman = ceil($jumlah_data / $banyak);
+
+if (isset($_GET['p'])) {
+    $p = $_GET['p'];
+    $mulai = ($p * $banyak) - $banyak;
+} else {
+    $mulai = 0;
+}
+
+$sql = "SELECT * FROM vorderdetail ORDER BY status, idorderdetail DESC LIMIT $mulai, $banyak";
+$row = $db->getAll($sql);
+
+$no = 1 + $mulai;
+
+$total = 0;
+
+
+?>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Pelanggan</th>
+            <th>Tanggal</th>
+            <th>Menu</th>
+            <th>Harga</th>
+            <th>Jumlah</th>
+            <th>Total</th>
+            <th>Alamat</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        <?php if (!empty($row)) { ?>
+            <?php
+            foreach ($row as $r):
+                ?>
+                <?php
+
+                if ($r['status'] == 0) {
+                    $status = '<td><a href="?f=order&m=bayar&id=' . $r['idorder'] . '">Bayar</a></td>';
+                } else {
+                    $status = '<td>Lunas</td>';
+                }
+
+                ?>
+                <tr>
+                    <td><?php echo $no++; ?></td>
+                    <td><?php echo $r['pelanggan']; ?></td>
+                    <td><?php echo $r['tglorder']; ?></td>
+                    <td><?php echo $r['menu']; ?></td>
+                    <td><?php echo $r['harga']; ?></td>
+                    <td><?php echo $r['jumlah']; ?></td>
+                    <td><?php echo $r['jumlah'] * $r['harga']; ?></td>
+                    <td><?php echo $r['alamat']; ?></td>
+
+                    <?php $total = $total + ($r['jumlah'] * $r['harga']); ?>
+                </tr>
+            <?php endforeach ?>
+        <?php } ?>
+        <tr>
+            <td colspan="6">
+                <h3>Grand Total</h3>
+            </td>
+            <td>
+                <h4><?php echo number_format($total); ?></h4>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<?php
+
+for ($i = 1; $i <= $halaman; $i++) {
+    echo '<a href="?f=orderdetail&m=select&p=' . $i . '">' . $i . '</a>';
+    echo '&nbsp;&nbsp;&nbsp;';
+}
+
+?>
