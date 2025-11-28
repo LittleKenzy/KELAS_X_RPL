@@ -100,7 +100,9 @@ class CartController extends Controller
             'idorder' => $idorder,
             'idpelanggan' => session('idpelanggan')['idpelanggan'],
             'tglorder' => $tanggal,
-            'total' => $total
+            'total' => $total,
+            'kembali' => 0,
+            'status' => 0
         ];
         // dd(session('idpelanggan'));
         Order::create($data);

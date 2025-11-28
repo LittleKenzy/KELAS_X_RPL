@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
@@ -13,7 +14,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('Backend.order.select');
+        $orders = Order::join('pelanggans', 'orders.idpelanggan', '=', 'pelanggans.idpelanggan')->select([
+            'orders.*',
+            'pelanggans.*'
+        ])
+            ->orderBy('status', 'asc')
+            ->paginate(2);
+        $kategoris = Kategori::all();
+        return view('Backend.order.select', ['orders' => $orders, 'kategoris' => $kategoris]);
     }
 
     /**
