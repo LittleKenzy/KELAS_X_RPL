@@ -18,7 +18,7 @@ Route::get('/', [FrontController::class, 'index']);
 
 Route::get('/show/{idkategori}', [FrontController::class, 'show']);
 Route::get('/register', [FrontController::class, 'register']);
-Route::get('/login', [FrontController::class, 'login']);
+Route::get('/login', [FrontController::class, 'login'])->name('login');
 Route::get('/logout', [FrontController::class, 'logout']);
 Route::post('/postregister', [FrontController::class, 'store']);
 Route::post('/postlogin', [FrontController::class, 'postlogin']);
@@ -38,12 +38,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::resource('user', UserController::class);
     });
     Route::group(['middleware' => ['CekLogin:kasir']], function () {
-        Route::resource('order', OrderController::class);
+        Route::resource('kasir/order', OrderController::class, ['as' => 'kasir']);
     });
     Route::group(['middleware' => ['CekLogin:manager']], function () {
         Route::resource('kategori', KategoriController::class);
         Route::resource('menu', MenuController::class);
-        Route::resource('order', OrderController::class);
+        Route::resource('manager/order', OrderController::class, ['as' => 'manager']);
         Route::get('select', [MenuController::class, 'select']);
         Route::post('postmenu/{id}', [MenuController::class, 'update']);
     });

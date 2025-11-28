@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Admin page aplikasi restoran smk</title>
     <link rel="stylesheet" href="{{ asset('bootstrap\bootstrap-5.3.8-dist\css\bootstrap.min.css') }}">
 </head>
+
 <body>
     <div class="container">
         <div class="mt-4">
@@ -27,18 +29,18 @@
         <div class="col-2">
             <ul class="list-group" style="margin-left: 40px; margin-top: 20px;">
                 @if (Auth::user()->level == 'admin')
-                <li class="list-group-item"><a href="">User</a></li>
+                    <li class="list-group-item"><a href="">User</a></li>
                 @endif
                 @if (Auth::user()->level == 'kasir')
-                <li class="list-group-item"><a href="{{ url('admin/order') }}">Order</a></li>
-                <li class="list-group-item"><a href="{{ url('admin/orderdetail') }}">Order detail</a></li>
+                    <li class="list-group-item"><a href="{{ url('admin/kasir/order') }}">Order</a></li>
+                    <li class="list-group-item"><a href="{{ url('admin/orderdetail') }}">Order detail</a></li>
                 @endif
                 @if (Auth::user()->level == 'manager')
-                <li class="list-group-item"><a href="{{ url('admin/kategori') }}">Kategori</a></li>
-                <li class="list-group-item"><a href="{{ url('admin/menu') }}">Menu</a></li>
-                <li class="list-group-item"><a href="">Pelanggan</a></li>
-                <li class="list-group-item"><a href="">Order</a></li>
-                <li class="list-group-item"><a href="">Order detail</a></li>
+                    <li class="list-group-item"><a href="{{ url('admin/kategori') }}">Kategori</a></li>
+                    <li class="list-group-item"><a href="{{ url('admin/menu') }}">Menu</a></li>
+                    <li class="list-group-item"><a href="">Pelanggan</a></li>
+                    <li class="list-group-item"><a href="{{ url('admin/manager/order') }}">Order</a></li>
+                    <li class="list-group-item"><a href="">Order detail</a></li>
                 @endif
             </ul>
         </div>
@@ -49,7 +51,8 @@
     <div class="bg-light mt-5">
         <p class="text-center">Copyright &copy; 2024</p>
     </div>
-    
+
     <script src="{{ asset('bootstrap\bootstrap-5.3.8-dist\js\bootstrap.min.js') }}"></script>
 </body>
+
 </html>

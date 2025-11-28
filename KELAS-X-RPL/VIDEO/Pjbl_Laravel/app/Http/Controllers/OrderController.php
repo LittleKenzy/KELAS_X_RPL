@@ -6,6 +6,7 @@ use App\Models\Kategori;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Request;
 
 class OrderController extends Controller
 {
@@ -45,7 +46,15 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $order = Order::where('idorder', $order->idorder)->first();
+        if ($order->status == 0) {
+            // Unpaid, show payment form
+            return view('Backend.order.update', ['order' => $order]);
+        } else {
+            // Paid, show details
+            $order = Order::with(['pelanggan', 'orderDetails.menu'])->where('idorder', $order->idorder)->first();
+            return view('Backend.order.detail', ['order' => $order]);
+        }
     }
 
     /**
@@ -53,15 +62,26 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $order = Order::where('idorder', $order->idorder)->first();
+        return view('Backend.order.update', ['order' => $order]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(\Illuminate\Http\Request $request, Order $order)
     {
-        //
+        $data = $request->validate([
+            'bayar' => 'required'
+        ]);
+        $kembalis = Order::where('idorder', $order->idorder)->first();
+        $kembali = $data['bayar'] - $kembalis->total;
+        Order::where('idorder', $order->idorder)->update([
+            'bayar' => $data['bayar'],
+            'kembali' => $kembali,
+            'status' => 1
+        ]);
+        return redirect('admin/order');
     }
 
     /**

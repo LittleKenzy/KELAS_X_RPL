@@ -10,15 +10,8 @@ class AuthController extends Controller
     public function index()
     {
         if ($user = Auth::user()) {
-            if ($user->level == 'admin') {
-                return redirect('admin/user');
-            }
-            if ($user->level == 'kasir') {
-                return redirect('admin/order');
-            }
-            if ($user->level == 'manager') {
-                return redirect('admin/kategori');
-            }
+            // Show dashboard instead of redirecting
+            return view('Backend.dashboard');
         }
         return view('Backend.login');
     }

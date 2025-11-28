@@ -16,4 +16,9 @@ class OrderDetail extends Model
         'jumlah',
         'hargajual',
     ];
+
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class, 'idmenu', 'idmenu');
+    }
 }

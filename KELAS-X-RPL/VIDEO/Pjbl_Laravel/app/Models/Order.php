@@ -18,4 +18,14 @@ class Order extends Model
         'bayar',
         'kembali'
     ];
+
+    public function pelanggan()
+    {
+        return $this->belongsTo(Pelanggan::class, 'idpelanggan');
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'idorder', 'idorder');
+    }
 }
