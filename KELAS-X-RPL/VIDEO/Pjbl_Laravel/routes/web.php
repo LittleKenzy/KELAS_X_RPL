@@ -6,6 +6,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::resource('kategori', KategoriController::class);
         Route::resource('menu', MenuController::class);
         Route::resource('manager/order', OrderController::class, ['as' => 'manager']);
+        Route::resource('manager/pelanggan', PelangganController::class, ['as' => 'manager']);
         Route::get('select', [MenuController::class, 'select']);
         Route::post('postmenu/{id}', [MenuController::class, 'update']);
     });

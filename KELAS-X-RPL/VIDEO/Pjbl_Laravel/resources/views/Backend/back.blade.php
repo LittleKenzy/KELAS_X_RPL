@@ -33,14 +33,14 @@
                 @endif
                 @if (Auth::user()->level == 'kasir')
                     <li class="list-group-item"><a href="{{ url('admin/kasir/order') }}">Order</a></li>
-                    <li class="list-group-item"><a href="{{ url('admin/orderdetail') }}">Order detail</a></li>
+                    <li class="list-group-item"><a href="{{ url('admin/manager/orderdetail') }}">Order detail</a></li>
                 @endif
                 @if (Auth::user()->level == 'manager')
-                    <li class="list-group-item"><a href="{{ url('admin/kategori') }}">Kategori</a></li>
-                    <li class="list-group-item"><a href="{{ url('admin/menu') }}">Menu</a></li>
-                    <li class="list-group-item"><a href="">Pelanggan</a></li>
+                    <li class="list-group-item"><a href="{{ url('admin/manager/kategori') }}">Kategori</a></li>
+                    <li class="list-group-item"><a href="{{ url('admin/manager/menu') }}">Menu</a></li>
+                    <li class="list-group-item"><a href="{{ url('admin/manager/pelanggan') }}">Pelanggan</a></li>
                     <li class="list-group-item"><a href="{{ url('admin/manager/order') }}">Order</a></li>
-                    <li class="list-group-item"><a href="">Order detail</a></li>
+                    <li class="list-group-item"><a href="{{ url('admin/manager/orderdetail') }}">Order detail</a></li>
                 @endif
             </ul>
         </div>
