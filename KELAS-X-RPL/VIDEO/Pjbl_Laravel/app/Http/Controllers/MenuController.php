@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\Menu;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
+use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
@@ -13,7 +15,12 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $kategoris = Kategori::all();
+        $menu = Menu::join('kategoris', 'menus.idkategori', '=', 'kategoris.idkategori')->select([
+            'menus.*',
+            'kategoris.*'
+        ])->paginate(3);
+        return view('Backend.menu.select', ['menus' => $menu, 'kategoris' => $kategoris]);
     }
 
     /**
@@ -62,5 +69,18 @@ class MenuController extends Controller
     public function destroy(Menu $menu)
     {
         //
+    }
+    public function select(Request $request)
+    {
+        $id = $request->idkategori;
+        $kategoris = Kategori::all();
+        $menu = Menu::join('kategoris', 'menus.idkategori', '=', 'kategoris.idkategori')
+            ->select([
+                'menus.*',
+                'kategoris.*'
+            ])
+            ->where('menus.idkategori', $id)
+            ->paginate(1);
+        return view('Backend.menu.select', ['menus' => $menu, 'kategoris' => $kategoris]);
     }
 }

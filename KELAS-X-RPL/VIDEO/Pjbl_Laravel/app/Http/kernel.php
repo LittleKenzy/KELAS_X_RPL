@@ -8,7 +8,7 @@ class Kernel extends HttpKernel
 {
     protected $middleware = [
         // middleware global
-        \App\Http\Middleware\CheckLogin::class,
+        // \App\Http\Middleware\CheckLogin::class,
     ];
 
     protected $middlewareGroups = [
