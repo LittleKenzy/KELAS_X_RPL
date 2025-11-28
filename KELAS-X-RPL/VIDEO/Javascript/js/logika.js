@@ -1,10 +1,21 @@
-let a = true
-let b = false
-let c = true
-let d = false
+let a = true;
+let b = false;
+let c = true;
+let d = false;
 
+console.log(d || b || a);
 
-console.log(a || b)
+console.log(a && b && c);
 
-console.log(a && b && C)
+let x = 8;
+let y = 7;
 
+console.log(x > y);
+console.log(x < y);
+console.log(x == y);
+console.log(x >= y);
+console.log(x <= y);
+
+let lima = "5";
+let five = 5;
+console.log(lima === five);
