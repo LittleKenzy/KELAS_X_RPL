@@ -2,11 +2,18 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import gsap from 'gsap';
+import useApi from '../hooks/useApi';
+import { profileApi } from '../api';
 
 const Hero = () => {
   const containerRef = useRef(null);
   
+  // Ambil data dari API
+  const { data: profile, loading, error } = useApi(() => profileApi.get());
+  
   useEffect(() => {
+    if (loading || error) return; // Jangan jalankan GSAP jika data belum siap
+    
     const ctx = gsap.context(() => {
       gsap.to('.hero-bg-parallax', {
         yPercent: 30,
@@ -20,7 +27,29 @@ const Hero = () => {
       });
     }, containerRef);
     return () => ctx.revert();
-  }, []);
+  }, [loading, error]);
+
+  if (loading) {
+      return (
+          <section className="relative min-h-screen flex items-center justify-center pt-20 pb-20">
+              <div className="animate-pulse flex flex-col items-center">
+                  <div className="h-8 w-64 bg-white/10 rounded-full mb-6"></div>
+                  <div className="h-20 w-96 bg-white/10 rounded-xl mb-8"></div>
+                  <div className="h-6 w-full max-w-2xl bg-white/10 rounded-full"></div>
+              </div>
+          </section>
+      );
+  }
+
+  if (error) {
+      return (
+          <section className="relative min-h-screen flex items-center justify-center pt-20 pb-20">
+              <div className="text-red-400 font-medium bg-red-400/10 px-6 py-4 rounded-xl border border-red-400/20">
+                  ⚠️ Error memuat profil: {error}
+              </div>
+          </section>
+      );
+  }
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-20">
@@ -49,7 +78,7 @@ const Hero = () => {
           >
             Halo, Saya
             <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-chrome-silver via-white to-chrome-gray drop-shadow-lg">
-              Bilal Alaudin.
+              {profile.name}.
             </span>
           </motion.h1>
 
@@ -59,7 +88,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 0.5 }}
             className="text-lg md:text-xl text-chrome-silver/70 max-w-2xl mb-12 font-light leading-relaxed"
           >
-            Siswa Kelas 10 RPL (Absen 6) dari SMKN 2 Buduran. Saya seorang pengembang frontend premium & insinyur kreatif yang memadukan kode dengan animasi visual untuk membangun dunia web yang imersif.
+            {profile.bio}
           </motion.p>
 
           <motion.div 

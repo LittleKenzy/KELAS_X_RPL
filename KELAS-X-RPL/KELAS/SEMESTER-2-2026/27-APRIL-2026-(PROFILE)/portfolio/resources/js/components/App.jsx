@@ -6,6 +6,8 @@ import Hero from './Hero';
 import WhoAmI from './WhoAmI';
 import Skills from './Skills';
 import Hobbies from './Hobbies';
+import PortfolioSection from './PortfolioSection';
+import BlogSection from './BlogSection';
 import Personality from './Personality';
 import DailyVibe from './DailyVibe';
 import LifeMotto from './LifeMotto';
@@ -37,7 +39,9 @@ const App = () => {
         <Hero />
         <WhoAmI />
         <Skills />
+        <PortfolioSection />
         <Hobbies />
+        <BlogSection />
         <Personality />
         <DailyVibe />
         <LifeMotto />

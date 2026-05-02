@@ -1,15 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Layers, Cpu, Layout, Terminal, Zap } from 'lucide-react';
+import useApi from '../hooks/useApi';
+import { skillsApi } from '../api';
 
-const skills = [
-  { name: 'Ekosistem React', level: 95, icon: <Code2 className="w-6 h-6 text-chrome-neon" />, description: 'Arsitektur komponen, Hooks, Manajemen state, Next.js.' },
-  { name: 'Animasi Lanjutan', level: 90, icon: <Zap className="w-6 h-6 text-chrome-neon" />, description: 'GSAP, Framer Motion, Three.js, Canvas.' },
-  { name: 'UI/UX Engineering', level: 88, icon: <Layout className="w-6 h-6 text-chrome-neon" />, description: 'Tailwind CSS, Styled Components, Sistem Desain.' },
-  { name: 'Integrasi Laravel', level: 85, icon: <Layers className="w-6 h-6 text-chrome-neon" />, description: 'Template Blade, Inertia, Pengembangan API, Routing.' },
-  { name: 'Arsitektur Sistem', level: 80, icon: <Cpu className="w-6 h-6 text-chrome-neon" />, description: 'Vite, Webpack, CI/CD, Optimasi performa.' },
-  { name: 'Terminal / Backend', level: 75, icon: <Terminal className="w-6 h-6 text-chrome-neon" />, description: 'Node.js, Express, Server Linux, Bash.' }
-];
+const iconMap = {
+  Code2: <Code2 className="w-6 h-6 text-chrome-neon" />,
+  Layers: <Layers className="w-6 h-6 text-chrome-neon" />,
+  Cpu: <Cpu className="w-6 h-6 text-chrome-neon" />,
+  Layout: <Layout className="w-6 h-6 text-chrome-neon" />,
+  Terminal: <Terminal className="w-6 h-6 text-chrome-neon" />,
+  Zap: <Zap className="w-6 h-6 text-chrome-neon" />
+};
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -25,6 +27,33 @@ const itemVariants = {
 };
 
 const Skills = () => {
+  const { data: skills, loading, error } = useApi(() => skillsApi.getAll());
+
+  if (loading) {
+    return (
+      <section className="py-24 relative z-10 bg-gradient-to-b from-transparent via-chrome-dark/80 to-transparent backdrop-blur-md">
+        <div className="container mx-auto px-6 animate-pulse">
+            <div className="h-8 w-32 mx-auto bg-white/10 rounded-full mb-12"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[1,2,3,4,5,6].map(i => (
+                    <div key={i} className="h-48 rounded-2xl bg-white/5 border border-white/5"></div>
+                ))}
+            </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+        <section className="py-24 text-center">
+            <div className="inline-block text-red-400 font-medium bg-red-400/10 px-6 py-4 rounded-xl border border-red-400/20">
+                ⚠️ Error memuat skill: {error}
+            </div>
+        </section>
+    );
+  }
+
   return (
     <section className="py-24 relative z-10 bg-gradient-to-b from-transparent via-chrome-dark/80 to-transparent backdrop-blur-md">
       <div className="container mx-auto px-6">
@@ -40,9 +69,9 @@ const Skills = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {skills.map((skill, index) => (
+          {skills?.map((skill) => (
             <motion.div 
-              key={index} 
+              key={skill.id} 
               variants={itemVariants}
               className="interactive group relative p-6 rounded-2xl glass-panel chrome-border hover:bg-white/5 transition-colors overflow-hidden"
             >
@@ -50,7 +79,7 @@ const Skills = () => {
               
               <div className="relative z-10">
                 <div className="w-12 h-12 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center mb-6 shadow-inner">
-                  {skill.icon}
+                  {iconMap[skill.icon] || <Code2 className="w-6 h-6 text-chrome-neon" />}
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2">{skill.name}</h4>
                 <p className="text-chrome-silver/60 text-sm mb-6 h-10">{skill.description}</p>
